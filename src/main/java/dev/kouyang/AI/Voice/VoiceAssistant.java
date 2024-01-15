@@ -5,6 +5,7 @@ import dev.kouyang.AI.LLM;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class VoiceAssistant {
@@ -21,13 +22,26 @@ public class VoiceAssistant {
                     System.out.println(Settings.Logging.info + "Sending request: " + request);
                     String response = LLM.interact(request);
                     System.out.println(Settings.Logging.info + "Response received");
+                    System.out.println(Settings.Logging.info + "Response: " + response);
                     String responseText = LLM.process(response);
-                    System.out.println(Settings.Logging.info + "Response: " + responseText);
-                    ArrayList<String> responseLLM = new ArrayList<>();
-                    responseLLM.add("python");
-                    responseLLM.add("TTS.py");
-                    responseLLM.add("\"" + responseText + "\"");
-                    LLM.cmd(responseLLM);
+                    System.out.println(Settings.Logging.info + "Response processed");
+                    TextToSpeech.TTS(responseText);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void interact() {
+        try {
+            while (System.in.available() == 0) {
+                String request = request();
+                System.out.println(Settings.Logging.info + "Sending request: " + request);
+                ArrayList<String> responseLLM = new ArrayList<>();
+                responseLLM.add("python");
+                responseLLM.add("Interactor.py");
+                responseLLM.add("\"" + request + "\"");
+                LLM.cmd(responseLLM);
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -26,7 +26,8 @@ public class SpeechToText {
                 // Read from the microphone
                 numBytesRead = microphone.read(buffer, 0, buffer.length);
                 if (numBytesRead <= 0) {
-                    System.out.println(Settings.Logging.error + "Failed to read audio data from microphone " + SpeechToText.class.getName());
+                    VoiceAssistant.microphone.close();
+                    startRecording();
                     continue;
                 }
                 out.write(buffer, 0, numBytesRead);
@@ -83,6 +84,11 @@ public class SpeechToText {
             }
             String transcription = leopard.process(shortAudioBuffer).getTranscriptString();
             leopard.delete();
+
+            if(transcription.equals("")){
+                System.out.println(Settings.Logging.error + "Failed to transcribe");
+                startRecording();
+            }
 
             return transcription;
         } catch (LeopardException e) {

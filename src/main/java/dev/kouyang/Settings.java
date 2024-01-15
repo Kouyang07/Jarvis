@@ -15,13 +15,9 @@ public class Settings {
     public static final String ANSI_WHITE = "\u001B[37m";
 
     public static String accessKey = "s670E92ZaWbE2bJvkhIspNyJbF9W7KXf9gCN9i2PIB1afgCk9ZkZ2A==";
-    public static String API_KEY = "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";
+    public static String API_KEY = "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";
     public static class Porcupine {
         public static String[] keywordPaths = {"C:\\Users\\croti\\Desktop\\JarvisData\\Jarvis_en.ppn"};
-    }
-
-    public static class Leopard {
-
     }
     public static class Logging{
         public static String info = ANSI_GREEN + "[INFO] " + ANSI_RESET;

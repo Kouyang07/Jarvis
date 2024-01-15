@@ -21,6 +21,7 @@ public class WakeWordListener {
                     .setKeywordPaths(Settings.Porcupine.keywordPaths)
                     .build();
         } catch (PorcupineException e) {
+            e.printStackTrace();
             System.out.println(Settings.Logging.error + "Porcupine failed to initialize");
         }
         System.out.println(Settings.Logging.info + "Listening for wake word...");
@@ -33,7 +34,8 @@ public class WakeWordListener {
                 // Read from the microphone
                 int numBytesRead = VoiceAssistant.microphone.read(buffer, 0, buffer.length);
                 if (numBytesRead <= 0) {
-                    System.out.println(Settings.Logging.error + "Failed to read audio data from microphone " + WakeWordListener.class.getName());
+                    VoiceAssistant.microphone.close();
+                    listen();
                     continue;
                 }
 

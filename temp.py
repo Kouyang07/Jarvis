@@ -1,10 +1,4 @@
 
-from datetime import datetime
+# Since the user request is missing, the script outputs a short message explaining this.
 
-# Get today's date
-today = datetime.now()
-
-# Format today's date as '2023-04-20' (for example)
-formatted_date = today.strftime('%Y-%m-%d')
-
-print(formatted_date)
+print("You haven't provided a request to act upon. Please provide some instructions.")
